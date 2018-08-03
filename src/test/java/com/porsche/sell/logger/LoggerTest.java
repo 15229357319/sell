@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 日志测试类
+ * 日志框架测试类
  *
  * @author XuHao
  * Email 15229357319@sina.cn
