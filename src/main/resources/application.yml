@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.56.102/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+servlet:
+    context-path: /sell
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+##  path: E:\03微服务\Spring Boot企业微信点餐系统\testLog
+#  file: E:\03微服务\Spring Boot企业微信点餐系统\testLog\sell.log
+#  level:
+#    com.porsche.sell.logger.LoggerTest: info
