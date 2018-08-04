@@ -29,6 +29,7 @@ public class LoggerTest {
         log.error("===============error=============");
         log.warn("===============warn=============");
         log.warn("===============warn=============");
+        log.warn("===============warn=============");
     }
 
 }
