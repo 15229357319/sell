@@ -28,6 +28,8 @@ public class LoggerTest {
         log.info("name:{}, password:{}", name, password);
         log.error("===============error=============");
         log.warn("===============warn=============");
+        log.warn("===============warn=============");
+        log.warn("===============warn=============");
     }
 
 }
