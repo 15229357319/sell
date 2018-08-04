@@ -22,12 +22,12 @@ public class LoggerTest {
     public void test1() {
         String name = "XuHao";
         String password = "123456";
-        log.debug("===============debug=============");
+        log.debug("===============日志debug=============");
         log.info("name: " + name + ", password: " + password);
         // 使用{}占位符写法
         log.info("name:{}, password:{}", name, password);
-        log.error("===============error=============");
-        log.warn("===============warn=============");
+        log.error("===============日志error=============");
+        log.warn("===============日志warn=============");
     }
 
 }
