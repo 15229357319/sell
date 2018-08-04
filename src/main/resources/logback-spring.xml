@@ -4,7 +4,7 @@
     <appender name="consoleLog1" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d -1 %msg%n</pattern>
+            <pattern>%d - %msg%n</pattern>
         </layout>
     </appender>
     <!--输出info日志到文件sell_info.%d.log-->
@@ -16,9 +16,7 @@
             <onMismatch>ACCEPT</onMismatch>
         </filter>
         <encoder>
-            <pattern>
-                %msg%n
-            </pattern>
+            <pattern>%d - %msg%n</pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -33,9 +31,7 @@
             <level>ERROR</level>
         </filter>
         <encoder>
-            <pattern>
-                %msg%n
-            </pattern>
+            <pattern>%d - %msg%n</pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
