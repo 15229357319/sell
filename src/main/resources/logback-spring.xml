@@ -4,8 +4,8 @@
     <!--日志格式-->
     <property name = "LOG_PATTERN" value = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
     <!--日志文件路径-->
-    <property name = "INFO_FILE_PATH" value="E:\03微服务\Spring Boot企业微信点餐系统\testLog\sell_info.%d{yyyy-MM-dd}.%i.log"/>
-    <property name = "ERROR_FILE_PATH" value="E:\03微服务\Spring Boot企业微信点餐系统\testLog\sell_error.%d{yyyy-MM-dd}.%i.log"/>
+    <property name = "INFO_FILE_PATH" value="E:/03微服务/Spring Boot企业微信点餐系统/testLog/sell_info.%d{yyyy-MM-dd}.%i.log"/>
+    <property name = "ERROR_FILE_PATH" value="E:/03微服务/Spring Boot企业微信点餐系统/testLog/sell_error.%d{yyyy-MM-dd}.%i.log"/>
 
 
     <!--输出到控制台-->
@@ -33,7 +33,7 @@
             <!--日志保存15天-->
             <maxHistory>15</maxHistory>
             <!--单个日志文件的最大，超过则新建日志文件存储-->
-            <timeBasedFileNamingAndTriggeringPolicy>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
@@ -54,7 +54,7 @@
             <!--日志保存15天-->
             <maxHistory>15</maxHistory>
             <!--单个日志文件的最大，超过则新建日志文件存储-->
-            <timeBasedFileNamingAndTriggeringPolicy>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
