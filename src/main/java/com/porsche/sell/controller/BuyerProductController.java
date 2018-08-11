@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 买家商品Controllers
+ * 买家商品Controller
  *
  * @author XuHao
  * Email 15229357319@sina.cn
