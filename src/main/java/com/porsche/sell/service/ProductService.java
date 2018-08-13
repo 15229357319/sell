@@ -1,5 +1,6 @@
 package com.porsche.sell.service;
 
+import com.porsche.sell.dto.CartDTO;
 import com.porsche.sell.entity.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,12 +48,13 @@ public interface ProductService {
      * 加库存
      *
      */
+    void increaseStock(List<CartDTO> cartDTOList);
 
     /**
      * 减库存
      *
      */
-
+    void decreaseStock(List<CartDTO> cartDTOList);
 
 
 

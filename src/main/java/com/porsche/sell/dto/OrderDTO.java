@@ -1,31 +1,22 @@
-package com.porsche.sell.entity;
+package com.porsche.sell.dto;
 
+import com.porsche.sell.entity.OrderDetail;
 import com.porsche.sell.enums.OrderStatusEnum;
 import com.porsche.sell.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 /**
- * 订单主表
- *
  * @author XuHao
  * Email 15229357319@sina.cn
- * create on 2018/8/11
+ * create on 2018/8/13
  */
-
-@Entity
 @Data
-@DynamicUpdate
-public class OrderMaster {
+public class OrderDTO {
 
-    @Id
     private String orderId;
 
     /**
@@ -56,12 +47,12 @@ public class OrderMaster {
     /**
      * 订单状态 默认为新下单
      */
-    private Integer orderStatus = OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
 
     /**
      * 支付状态 默认为未支付
      */
-    private Integer payStatus = PayStatusEnum.WAIT.getCode();
+    private Integer payStatus;
 
     /**
      * 创建时间
@@ -72,5 +63,10 @@ public class OrderMaster {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * 订单详情
+     */
+    private List<OrderDetail> orderDetails;
 
 }
