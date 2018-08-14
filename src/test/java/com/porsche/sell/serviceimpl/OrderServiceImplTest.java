@@ -4,11 +4,15 @@ import com.porsche.sell.dto.OrderDTO;
 import com.porsche.sell.entity.OrderDetail;
 import com.porsche.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,8 @@ import static org.junit.Assert.*;
 public class OrderServiceImplTest {
 
     private static final String OPENID = "1012011nf22o3938ncbvsdbv";
+
+    private static final String ORDERID = "1534175072601793189";
 
     @Autowired
     private OrderService orderService;
@@ -54,14 +60,23 @@ public class OrderServiceImplTest {
         orderDTO.setOrderDetails(orderDetailList);
         OrderDTO result = orderService.create(orderDTO);
         log.info("【创建订单】: result = {}" + result);
+        Assert.assertNotNull(result);
     }
 
     @Test
+    @Transactional
     public void findOne() {
+        OrderDTO result = orderService.findOne(ORDERID);
+        log.info("【查询单个订单】: result = {}" + result);
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void findList() {
+        PageRequest request = PageRequest.of(0, 10);
+        Page<OrderDTO> orderDTOS = orderService.findList(OPENID, request);
+        log.info("【查询订单列表】：result = {}" + orderDTOS);
+        Assert.assertEquals(2, orderDTOS.getTotalElements());
     }
 
     @Test

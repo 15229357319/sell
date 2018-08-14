@@ -1,5 +1,6 @@
 package com.porsche.sell.serviceimpl;
 
+import com.porsche.sell.converter.OrderMaster2OrderDTOConverter;
 import com.porsche.sell.dao.OrderDetailRepository;
 import com.porsche.sell.dao.OrderMasterRepository;
 import com.porsche.sell.dto.CartDTO;
@@ -17,12 +18,16 @@ import com.porsche.sell.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     private  OrderMasterRepository masterRepository;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderDTO create(OrderDTO orderDTO) {
 
         String orderId = KeyUtil.getUniqueKey();
@@ -56,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderDTO.getOrderDetails()) {
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
             if (null == productInfo) {
-                throw new SellException(ResultEnum.PRODUCT_NOT_EXIXT);
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             // 2.计算总价
             orderAmount = productInfo.getProductPrice()
@@ -86,12 +91,29 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findOne(String orderId) {
-        return null;
+
+        OrderMaster orderMaster = masterRepository.getOne(orderId);
+        if (null == orderMaster){
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        List<OrderDetail> orderDetailList = detailRepository.findByOrderId(orderId);
+        if (CollectionUtils.isEmpty(orderDetailList)){
+            throw new SellException(ResultEnum.ORDER_DETAIL_NOT_EXIST);
+        }
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(orderMaster, orderDTO);
+        orderDTO.setOrderDetails(orderDetailList);
+
+        return orderDTO;
     }
 
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        return null;
+
+        Page<OrderMaster> orderMasters = masterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.converter(orderMasters.getContent());
+        return new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasters
+                .getTotalElements());
     }
 
     @Override

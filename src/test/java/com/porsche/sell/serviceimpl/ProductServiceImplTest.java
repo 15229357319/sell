@@ -58,7 +58,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void findAll() {
-        PageRequest request = new PageRequest(0, 10);
+        PageRequest request = PageRequest.of(0, 10);
         Page<ProductInfo> result = productService.findAll(request);
         Assert.assertEquals(1, result.getTotalPages());
     }
