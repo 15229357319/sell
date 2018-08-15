@@ -2,6 +2,7 @@ package com.porsche.sell.serviceimpl;
 
 import com.porsche.sell.dto.OrderDTO;
 import com.porsche.sell.entity.OrderDetail;
+import com.porsche.sell.enums.OrderStatusEnum;
 import com.porsche.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,7 +82,13 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @Transactional
     public void cancel() {
+
+        OrderDTO result = orderService.findOne(ORDERID);
+        result = orderService.cancel(result);
+        Assert.assertEquals(OrderStatusEnum.CANCELED.getCode(), result.getOrderStatus());
+
     }
 
     @Test

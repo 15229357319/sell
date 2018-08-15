@@ -18,13 +18,15 @@ public interface ProductService {
 
     /**
      * 通过商品ID查询商品
-      * @param productId
+     *
+     * @param productId
      * @return
      */
     ProductInfo findOne(String productId);
 
     /**
      * 保存商品信息
+     *
      * @param productInfo
      * @return
      */
@@ -39,6 +41,7 @@ public interface ProductService {
 
     /**
      * 分页查询所有商品列表
+     *
      * @param pageable
      * @return
      */
@@ -47,17 +50,16 @@ public interface ProductService {
     /**
      * 加库存
      *
+     * @param cartDTOList
      */
     void increaseStock(List<CartDTO> cartDTOList);
 
     /**
      * 减库存
      *
+     * @param cartDTOList
      */
     void decreaseStock(List<CartDTO> cartDTOList);
-
-
-
 
 
 }

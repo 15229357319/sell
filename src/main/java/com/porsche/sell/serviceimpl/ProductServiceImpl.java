@@ -15,13 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/** 商品ServiceImpl
+/**
+ * 商品ServiceImpl
+ *
  * @author XuHao
  * Email 15229357319@sina.cn
  * create on 2018/8/8
  */
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductInfoRepository repository;
@@ -47,24 +49,37 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void increaseStock(List<CartDTO> cartDTOList) {
+
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo = repository.getOne(cartDTO.getProductId());
+            if (null == productInfo) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
 
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void decreaseStock(List<CartDTO> cartDTOList) {
-        for (CartDTO cartDTO : cartDTOList){
+
+        for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.getOne(cartDTO.getProductId());
-            if (null == productInfo){
+            if (null == productInfo) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
-            if (result < 0){
+            if (result < 0) {
                 throw new SellException(ResultEnum.STOCK_NOT_ENOUGH);
             }
             productInfo.setProductStock(result);
             repository.save(productInfo);
         }
+
     }
 }
