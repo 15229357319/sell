@@ -3,6 +3,7 @@ package com.porsche.sell.serviceimpl;
 import com.porsche.sell.dto.OrderDTO;
 import com.porsche.sell.entity.OrderDetail;
 import com.porsche.sell.enums.OrderStatusEnum;
+import com.porsche.sell.enums.PayStatusEnum;
 import com.porsche.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -92,10 +93,18 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @Transactional
     public void finish() {
+        OrderDTO result = orderService.findOne(ORDERID);
+        OrderDTO finish = orderService.finish(result);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(), finish.getOrderStatus());
     }
 
     @Test
+    @Transactional
     public void paid() {
+        OrderDTO result = orderService.findOne(ORDERID);
+        OrderDTO finish = orderService.paid(result);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), finish.getPayStatus());
     }
 }
