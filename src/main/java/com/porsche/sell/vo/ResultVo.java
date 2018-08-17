@@ -3,7 +3,7 @@ package com.porsche.sell.vo;
 import lombok.Data;
 
 /**
- * 封装结果集类
+ * 结果集封装类
  *
  * @author XuHao
  * Email 15229357319@sina.cn

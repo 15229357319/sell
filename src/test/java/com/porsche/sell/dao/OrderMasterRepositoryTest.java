@@ -40,7 +40,7 @@ public class OrderMasterRepositoryTest {
 
     @Test
     public void findByBuyerOpenid() {
-        PageRequest request = new PageRequest(0, 10);
+        PageRequest request = PageRequest.of(0, 10);
         Page<OrderMaster> orderMasters = repository.findByBuyerOpenid(OPNEID, request);
         Assert.assertEquals(1, orderMasters.getTotalElements());
     }
