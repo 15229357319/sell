@@ -1,8 +1,8 @@
 package com.porsche.sell.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.porsche.sell.entity.OrderDetail;
-import com.porsche.sell.enums.OrderStatusEnum;
-import com.porsche.sell.enums.PayStatusEnum;
+import com.porsche.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -57,11 +57,13 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     /**
