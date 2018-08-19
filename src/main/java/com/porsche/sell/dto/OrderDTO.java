@@ -13,6 +13,8 @@ import java.util.List;
  * @author XuHao
  * Email 15229357319@sina.cn
  * create on 2018/8/13
+ *
+ *  @JsonInclude(JsonInclude.Include.NON_NULL)
  */
 @Data
 public class OrderDTO {
