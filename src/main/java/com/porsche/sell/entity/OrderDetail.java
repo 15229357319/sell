@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 订单详情表
+ * 订单详情
  *
  * @author XuHao
  * Email 15229357319@sina.cn
@@ -51,8 +51,14 @@ public class OrderDetail {
      */
     private String productIcon;
 
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
 }

@@ -1,7 +1,9 @@
 package com.porsche.sell.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.porsche.sell.enums.OrderStatusEnum;
 import com.porsche.sell.enums.PayStatusEnum;
+import com.porsche.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -66,11 +68,13 @@ public class OrderMaster {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
 }

@@ -3,6 +3,7 @@ package com.porsche.sell.controller;
 import com.porsche.sell.constant.Constant;
 import com.porsche.sell.converter.OrderForm2OrderDTOConverter;
 import com.porsche.sell.dto.OrderDTO;
+import com.porsche.sell.entity.OrderDetail;
 import com.porsche.sell.enums.ResultEnum;
 import com.porsche.sell.exception.SellException;
 import com.porsche.sell.form.OrderForm;
@@ -83,9 +84,41 @@ public class BuyerOrderController {
         return ResultUtil.success(orderDTOPage.getContent());
     }
 
-    // 订单详情
+    /**
+     * 订单详情
+     *
+     * @return
+     */
+    @GetMapping("/detail")
+    public ResultVo<OrderDTO> detail(@RequestParam("openid") String openid,
+                                     @RequestParam("orderId") String orderId) {
 
-    // 取消订单
+        // TODO 需要通过openid进行安全验证
 
+        if (StringUtils.isEmpty(orderId)) {
+            log.error("【订单详情】orderId为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        OrderDTO orderDTO = orderService.findOne(orderId);
+        return ResultUtil.success(orderDTO);
+    }
 
+    /**
+     * 取消订单
+     *
+     * @return
+     */
+    @PostMapping("/cancel")
+    public ResultVo cancel(@RequestParam("openid") String openid,
+                           @RequestParam("orderId") String orderId) {
+
+        // TODO   需要通过openid进行安全验证
+        if (StringUtils.isEmpty(orderId)) {
+            log.error("【取消订单】orderId为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        OrderDTO orderDTO = orderService.findOne(orderId);
+        orderService.cancel(orderDTO);
+        return ResultUtil.success();
+    }
 }
