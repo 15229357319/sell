@@ -17,7 +17,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
     /**
      * 查询指定用户订单
      *
-     * @param openid
+     * @param buyerOpenid
      * @param pageable
      * @return
      */

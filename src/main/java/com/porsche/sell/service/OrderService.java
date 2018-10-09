@@ -30,7 +30,7 @@ public interface OrderService {
     OrderDTO findOne(String orderId);
 
     /**
-     * 查询订单列表
+     * 查询指定用户的订单列表
      *
      * @param buyerOpenid
      * @param pageable
@@ -58,6 +58,15 @@ public interface OrderService {
      * @return
      */
     OrderDTO paid(OrderDTO orderDTO);
+
+    /**
+     * @Author Xu hao
+     * @Description 查询所有订单列表
+     * @Date 2018/9/26 21:33
+     * @param pageable
+     * @return  Page<OrderDTO>
+     **/
+    Page<OrderDTO> findList(Pageable pageable);
 
 
 }

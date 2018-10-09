@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,5 +107,15 @@ public class OrderServiceImplTest {
         OrderDTO result = orderService.findOne(ORDERID);
         OrderDTO finish = orderService.paid(result);
         Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), finish.getPayStatus());
+    }
+
+    @Test
+    public void list(){
+        PageRequest page = PageRequest.of(0, 10);
+        Page<OrderDTO> orderDTOS = orderService.findList(page);
+        log.info("【查询所有订单】: result = {}", orderDTOS);
+//        Assert.assertEquals(4, orderDTOS.getTotalElements());
+        // 统一测试使用的断言
+        Assert.assertTrue("测试通过", !CollectionUtils.isEmpty(orderDTOS.getContent()));
     }
 }
