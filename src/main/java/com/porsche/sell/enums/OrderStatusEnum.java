@@ -10,7 +10,7 @@ import lombok.Getter;
  * create on 2018/8/11
  */
 @Getter
-public enum OrderStatusEnum {
+public enum OrderStatusEnum implements CodeEnum{
 
     /**
      * 新订单

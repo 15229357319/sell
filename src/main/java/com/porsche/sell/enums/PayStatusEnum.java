@@ -10,7 +10,7 @@ import lombok.Getter;
  * create on 2018/8/11
  */
 @Getter
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnum{
 
     /**
      * 等待支付

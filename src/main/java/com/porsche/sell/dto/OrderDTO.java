@@ -1,7 +1,11 @@
 package com.porsche.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.porsche.sell.entity.OrderDetail;
+import com.porsche.sell.enums.OrderStatusEnum;
+import com.porsche.sell.enums.PayStatusEnum;
+import com.porsche.sell.utils.EnumUtil;
 import com.porsche.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -72,5 +76,15 @@ public class OrderDTO {
      * 订单详情
      */
     private List<OrderDetail> orderDetails;
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 
 }
