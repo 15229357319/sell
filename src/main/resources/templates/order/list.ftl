@@ -39,6 +39,29 @@
                 </#list>
                 </tbody>
             </table>
+
+        </div>
+        <#--分页-->
+        <div class="col-md-12 column">
+            <ul class="pagination pull-right">
+                <#if currentPage lte 1>
+                    <li class="disabled"><a href="#">Prev</a></li>
+                <#else>
+                    <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${currentSize}">Prev</a></li>
+                </#if>
+                <#list 1..list.getTotalPages() as index>
+                    <#if currentPage == index >
+                        <li class="disabled"><a href="#">${index}</a></li>
+                    <#else>
+                    <li><a href="/sell/seller/order/list?page=${index}&size=${currentSize}">${index}</a></li>
+                    </#if>
+                </#list>
+                <#if currentPage gte list.getTotalPages()>
+                    <li class="disabled"><a href="#">Next</a></li>
+                <#else>
+                    <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${currentSize}">Next</a></li>
+                </#if>
+            </ul>
         </div>
     </div>
 </div>
