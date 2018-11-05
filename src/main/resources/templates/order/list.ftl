@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <table class="table table-striped">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>订单ID</th>
@@ -34,7 +34,11 @@
                     <td>${orderDTO.getPayStatusEnum().msg}</td>
                     <td>${orderDTO.createTime}</td>
                     <td>详情</td>
-                    <td>删除</td>
+                    <#if orderDTO.orderStatus == 0>
+                        <td><a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a></td>
+                    <#else>
+
+                    </#if>
                 </tr>
                 </#list>
                 </tbody>

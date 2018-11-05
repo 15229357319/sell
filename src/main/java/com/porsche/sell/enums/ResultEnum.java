@@ -13,6 +13,11 @@ import lombok.Getter;
 public enum ResultEnum {
 
     /**
+     * 成功
+     **/
+    SUCCESS(1, "成功"),
+
+    /**
      * 商品不存在
      */
     PRODUCT_NOT_EXIST(10, "商品不存在"),
@@ -51,6 +56,11 @@ public enum ResultEnum {
      * 购物车为空
      */
     CART_EMPTY(17, "购物车为空"),
+
+    /**
+     * 订单取消成功
+     **/
+    ORDER_CANCEL_SUCCESS(18, "订单取消成功"),
 
     /**
      * 支付状态不正确
