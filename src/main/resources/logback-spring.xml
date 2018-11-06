@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
+
+    <!--日志格式-->
+    <property name = "LOG_PATTERN" value = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <!--日志文件路径-->
+    <property name = "INFO_FILE_PATH" value="E:/03微服务/Spring Boot企业微信点餐系统/testLog/sell_info.%d{yyyy-MM-dd}.%i.log"/>
+    <property name = "ERROR_FILE_PATH" value="E:/03微服务/Spring Boot企业微信点餐系统/testLog/sell_error.%d{yyyy-MM-dd}.%i.log"/>
+
+
     <!--输出到控制台-->
     <appender name="consoleLog1" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d - %msg%n</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </layout>
     </appender>
     <!--输出info日志到文件sell_info.%d.log-->
@@ -16,12 +24,18 @@
             <onMismatch>ACCEPT</onMismatch>
         </filter>
         <encoder>
-            <pattern>%d - %msg%n</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>E:\03微服务\Spring Boot企业微信点餐系统\testLog\sell_info.%d.log</fileNamePattern>
+            <fileNamePattern>${INFO_FILE_PATH}</fileNamePattern>
+            <!--日志保存15天-->
+            <maxHistory>15</maxHistory>
+            <!--单个日志文件的最大，超过则新建日志文件存储-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
     <!--输出error日志到文件sell_error.%d.log-->
@@ -31,12 +45,18 @@
             <level>ERROR</level>
         </filter>
         <encoder>
-            <pattern>%d - %msg%n</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>E:\03微服务\Spring Boot企业微信点餐系统\testLog\sell_error.%d.log</fileNamePattern>
+            <fileNamePattern>${ERROR_FILE_PATH}</fileNamePattern>
+            <!--日志保存15天-->
+            <maxHistory>15</maxHistory>
+            <!--单个日志文件的最大，超过则新建日志文件存储-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
