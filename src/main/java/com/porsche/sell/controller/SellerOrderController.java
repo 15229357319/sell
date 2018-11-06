@@ -2,6 +2,7 @@ package com.porsche.sell.controller;
 
 import com.porsche.sell.dto.OrderDTO;
 import com.porsche.sell.enums.ResultEnum;
+import com.porsche.sell.exception.SellException;
 import com.porsche.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,31 @@ public class SellerOrderController {
         map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMsg());
         map.put("url", "/sell/seller/order/list");
         return new ModelAndView("common/success", map);
+    }
+
+    /**
+     * @Author Xu hao
+     * @Description 订单详情
+     * @Date 2018/11/6 20:24
+     * @param orderId
+     * @param map
+     * @return org.springframework.web.servlet.ModelAndView
+     **/
+    @GetMapping("/detail")
+    public ModelAndView detail(@RequestParam("orderId") String orderId,
+                               Map<String, Object> map){
+        OrderDTO orderDTO = new OrderDTO();
+        try {
+            orderDTO = orderService.findOne(orderId);
+        } catch (SellException e){
+            log.info("【卖家端查询订单详情】查询订单详情发送异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/order/list");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("orderDTO", orderDTO);
+        return new ModelAndView("order/detail", map);
+
     }
 
 }
