@@ -56,7 +56,7 @@
         </div>
         <div class="col-md-4 column">
             <#if 0 == orderDTO.orderStatus>
-                <a href="/sell/seller/order/finish" type="button" class="btn btn-primary btn-default">完结订单</a>
+                <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-primary btn-default">完结订单</a>
                 <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-danger
                 btn-default">取消订单</a>
             </#if>

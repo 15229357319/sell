@@ -63,6 +63,11 @@ public enum ResultEnum {
     ORDER_CANCEL_SUCCESS(18, "订单取消成功"),
 
     /**
+     * 订单完结成功
+     **/
+    ORDER_FINISH_SUCCESS(19, "订单完结成功"),
+
+    /**
      * 支付状态不正确
      */
     PAY_STATUS_ERROR(20, "支付状态不正确"),
