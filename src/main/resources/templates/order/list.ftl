@@ -1,14 +1,15 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>买家商品列表</title>
+    <title>卖家商品列表</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <table class="table table-bordered">
+            <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th>订单ID</th>
