@@ -1,20 +1,26 @@
 package com.porsche.sell.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.porsche.sell.enums.ProductStatusEnum;
+import com.porsche.sell.utils.EnumUtil;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 商品信息
- *
+ *      （注解@DynamicUpdate 自动更新时间）
  * @author XuHao
  * Email 15229357319@sina.cn
  * create on 2018/8/7
  */
 @Entity
 @Data
+@DynamicUpdate  /** 自动更新时间 **/
 public class ProductInfo {
 
     @Id
@@ -54,6 +60,21 @@ public class ProductInfo {
      * 类目编号
      */
     private Integer categoryType;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum(){
+        return EnumUtil.getByCode(this.productStatus, ProductStatusEnum.class);
+    }
 
     public ProductInfo() {
     }

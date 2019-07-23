@@ -2,7 +2,7 @@
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand">
             <a href="#">
-                卖家管理系统
+               商户管理系统
             </a>
         </li>
         <li>
