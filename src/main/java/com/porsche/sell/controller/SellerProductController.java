@@ -1,7 +1,9 @@
 package com.porsche.sell.controller;
 
 import com.porsche.sell.entity.ProductInfo;
+import com.porsche.sell.enums.ResultEnum;
 import com.porsche.sell.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/seller/product")
+@Slf4j
 public class SellerProductController {
 
     @Autowired
@@ -46,6 +49,54 @@ public class SellerProductController {
         map.put("currentPage", page);
         map.put("currentSize", size);
         return new ModelAndView("product/list", map);
+    }
+
+    /**
+     * @Author Xu hao
+     * @Description 商品上架
+     * @Date 2019/7/25 23:17
+     * @param productId
+     * @param map
+     * @return org.springframework.web.servlet.ModelAndView
+     **/
+    @GetMapping("/on_sale")
+    public ModelAndView onSale(@RequestParam("productId") String productId,
+                               Map<String, Object> map){
+        try {
+            productService.onSale(productId);
+        } catch (Exception e){
+            log.error("【商品上架】 商品上架发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("msg", ResultEnum.PRODUCT_ON_SALE_SUCCESS.getMsg());
+        map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
+    }
+
+    /**
+     * @Author Xu hao
+     * @Description 商品下架
+     * @Date 2019/7/25 23:17
+     * @param productId
+     * @param map
+     * @return org.springframework.web.servlet.ModelAndView
+     **/
+    @GetMapping("/off_sale")
+    public ModelAndView offSale(@RequestParam("productId") String productId,
+                               Map<String, Object> map){
+        try {
+            productService.offSale(productId);
+        } catch (Exception e){
+            log.error("【商品下架】 商品下架发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("msg", ResultEnum.PRODUCT_OFF_SALE_SUCCESS.getMsg());
+        map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
     }
 
 }

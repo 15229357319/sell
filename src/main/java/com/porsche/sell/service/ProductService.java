@@ -55,11 +55,29 @@ public interface ProductService {
     void increaseStock(List<CartDTO> cartDTOList);
 
     /**
-     * 减库存
+     * 库减存
      *
      * @param cartDTOList
      */
     void decreaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * @Author Xu hao
+     * @Description 上架
+     * @Date 2019/7/25 22:28
+     * @param productId
+     * @return com.porsche.sell.entity.ProductInfo
+     **/
+    ProductInfo onSale(String productId);
+
+    /**
+     * @Author Xu hao
+     * @Description 下架
+     * @Date 2019/7/25 22:29
+     * @param productId
+     * @return com.porsche.sell.entity.ProductInfo
+     **/
+    ProductInfo offSale(String productId);
 
 
 }

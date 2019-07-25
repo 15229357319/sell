@@ -73,6 +73,21 @@ public enum ResultEnum {
     PAY_STATUS_ERROR(20, "支付状态不正确"),
 
     /**
+     * 商品状态不正确
+     */
+    PRODUCT_STATUS_ERROR(21, "商品状态不正确"),
+
+    /**
+     * 商品上架成功
+     */
+    PRODUCT_ON_SALE_SUCCESS(22, "商品上架成功"),
+
+    /**
+     * 商品下架成功
+     */
+    PRODUCT_OFF_SALE_SUCCESS(23, "商品下架成功"),
+
+    /**
      * 参数错误
      */
     PARAM_ERROR(30, "参数错误"),
