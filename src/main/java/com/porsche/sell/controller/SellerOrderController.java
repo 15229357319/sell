@@ -90,7 +90,7 @@ public class SellerOrderController {
         try {
             orderDTO = orderService.findOne(orderId);
         } catch (SellException e){
-            log.info("【卖家端查询订单详情】查询订单详情发送异常{}", e);
+            log.error("【卖家端查询订单详情】查询订单详情发送异常{}", e);
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
             return new ModelAndView("common/error", map);
@@ -98,6 +98,31 @@ public class SellerOrderController {
         map.put("orderDTO", orderDTO);
         return new ModelAndView("order/detail", map);
 
+    }
+
+    /**
+     * @Author Xu hao
+     * @Description 完结订单
+     * @Date 2018/11/7 23:11
+     * @param orderId
+     * @param map
+     * @return org.springframework.web.servlet.ModelAndView
+     **/
+    @GetMapping("/finish")
+    public ModelAndView finish(@RequestParam("orderId") String orderId,
+                               Map<String, Object> map){
+        try {
+            OrderDTO orderDTO = orderService.findOne(orderId);
+            orderService.finish(orderDTO);
+        } catch (SellException e){
+            log.error("【卖家端完结订单】完结订单发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/order/list");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMsg());
+        map.put("url", "/sell/seller/order/list");
+        return new ModelAndView("common/success", map);
     }
 
 }

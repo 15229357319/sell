@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -62,4 +64,19 @@ public class ProductServiceImplTest {
         Page<ProductInfo> result = productService.findAll(request);
         Assert.assertEquals(1, result.getTotalPages());
     }
+
+    @Test
+    @Transactional
+    public void onSale(){
+        ProductInfo productInfo = productService.onSale("00283820");
+        Assert.assertTrue(null != productInfo);
+    }
+
+    @Test
+    @Transactional
+    public void offSale(){
+        ProductInfo productInfo = productService.offSale("1798123791");
+        Assert.assertTrue(null != productInfo);
+    }
+
 }

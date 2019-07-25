@@ -63,9 +63,29 @@ public enum ResultEnum {
     ORDER_CANCEL_SUCCESS(18, "订单取消成功"),
 
     /**
+     * 订单完结成功
+     **/
+    ORDER_FINISH_SUCCESS(19, "订单完结成功"),
+
+    /**
      * 支付状态不正确
      */
     PAY_STATUS_ERROR(20, "支付状态不正确"),
+
+    /**
+     * 商品状态不正确
+     */
+    PRODUCT_STATUS_ERROR(21, "商品状态不正确"),
+
+    /**
+     * 商品上架成功
+     */
+    PRODUCT_ON_SALE_SUCCESS(22, "商品上架成功"),
+
+    /**
+     * 商品下架成功
+     */
+    PRODUCT_OFF_SALE_SUCCESS(23, "商品下架成功"),
 
     /**
      * 参数错误
