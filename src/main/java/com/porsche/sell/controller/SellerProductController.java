@@ -1,18 +1,22 @@
 package com.porsche.sell.controller;
 
+import com.porsche.sell.entity.ProductCategory;
 import com.porsche.sell.entity.ProductInfo;
 import com.porsche.sell.enums.ResultEnum;
+import com.porsche.sell.service.CategoryService;
 import com.porsche.sell.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +33,9 @@ public class SellerProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     /**
      * @Author Xu hao
@@ -97,6 +104,28 @@ public class SellerProductController {
         map.put("msg", ResultEnum.PRODUCT_OFF_SALE_SUCCESS.getMsg());
         map.put("url", "/sell/seller/product/list");
         return new ModelAndView("common/success", map);
+    }
+
+    /**
+     * @Author Xu hao
+     * @Description 修改商品信息
+     * @Date 2019/9/23 22:15
+     * @param productId
+     * @param map
+     * @return org.springframework.web.servlet.ModelAndView
+     **/
+    @GetMapping("/index")
+    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId,
+                      Map<String, Object> map) {
+        if (!StringUtils.isEmpty(productId)) {
+            ProductInfo productInfo = productService.findOne(productId);
+            map.put("productInfo", productInfo);
+        }
+        // 查询所有的类目
+        List<ProductCategory> categories = categoryService.findAll();
+        map.put("categories", categories);
+
+        return new ModelAndView("product/index", map);
     }
 
 }
